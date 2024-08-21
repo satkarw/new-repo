@@ -1,0 +1,16 @@
+{
+  "rules": {
+    ".read": "auth != null",   // Allows read access only to authenticated users
+    ".write": "auth != null",  // Allows write access only to authenticated users
+    "posts": {
+      ".read": "true",         // Public read access to posts
+      ".write": "auth != null" // Write access to posts is restricted to authenticated users
+    },
+    "users": {
+      "$userId": {
+        ".read": "$userId === auth.uid", // Allows a user to read only their own data
+        ".write": "$userId === auth.uid" // Allows a user to write only their own data
+      }
+    }
+  }
+}
